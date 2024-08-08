@@ -1,5 +1,5 @@
-const activityHub = require('../tools/activityHub');
-const wakeLock = require('../tools/wakeLock');
+const activityHub = require("../tools/activityHub");
+const wakeLock = require("../tools/wakeLock");
 
 class ActivityManager {
 	constructor(ipcRenderer, config) {
@@ -109,8 +109,9 @@ function callDisconnectedHandler(self) {
 function meetingStartNotifyHandler(self) {
 	if (!self.config.disableMeetingNotifications) {
 		return async (meeting) => {
-			new window.Notification('Meeting has started', {
-				type: 'meeting-started', body: meeting.title
+			new window.Notification("Meeting has started", {
+				type: "meeting-started",
+				body: meeting.title,
 			});
 		};
 	}
@@ -121,7 +122,7 @@ function meetingStartNotifyHandler(self) {
 function myStatusChangedHandler(self) {
 	// eslint-disable-next-line no-unused-vars
 	return async (event) => {
-		self.ipcRenderer.invoke('user-status-changed', { data: event.data });
+		self.ipcRenderer.invoke("user-status-changed", { data: event.data });
 	};
 }
 

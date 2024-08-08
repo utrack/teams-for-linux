@@ -1,9 +1,9 @@
 class Instance {
 	async whenReady(tries = 0) {
 		if (tries >= 5) {
-			throw new Error('Failed to get app objects after 5 tries');
+			throw new Error("Failed to get app objects after 5 tries");
 		}
-		
+
 		const obj = getAppObjects();
 		if (obj) {
 			return obj;
@@ -15,18 +15,19 @@ class Instance {
 }
 
 function getAppObjects() {
-	if (typeof window.angular == 'undefined') {
+	if (typeof msteamscalling == "undefined") {
 		return null;
 	}
 
+	let dref = msteamscalling.deref();
+
 	return {
-		controller: window.angular.element(document.documentElement).controller(),
-		injector: window.angular.element(document.documentElement).injector()
+		controller: dref,
 	};
 }
 
 async function sleep(ms) {
-	return new Promise(r => setTimeout(r, ms));
+	return new Promise((r) => setTimeout(r, ms));
 }
 
 module.exports = new Instance();
